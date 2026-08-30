@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: #100E0C;
+  color: #F4EFE6;
+}
+
+/* Warm ambient wash, fixed behind everything. */
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(62rem 40rem at 74% -12%, rgba(201, 165, 92, 0.13), transparent 62%),
+    radial-gradient(48rem 34rem at 4% 12%, rgba(127, 160, 138, 0.07), transparent 60%);
+}
+
+/* Fine film grain so the flat dark never looks plasticky. */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #786F62;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Card with a cursor-tracked highlight. Coordinates come from JS. */
+.spot {
+  position: relative;
+  background-color: #191510;
+  border: 1px solid #302A21;
+  transition: border-color 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+}
+.spot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(
+    18rem circle at var(--mx, 50%) var(--my, 50%),
+    rgba(201, 165, 92, 0.1),
+    transparent 62%
+  );
+}
+.spot:hover {
+  border-color: rgba(201, 165, 92, 0.4);
+  transform: translateY(-2px);
+}
+.spot:hover::before {
+  opacity: 1;
+}
+
+.link-underline {
+  text-decoration: underline;
+  text-decoration-color: rgba(201, 165, 92, 0.45);
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.25s ease, color 0.25s ease;
+}
+.link-underline:hover {
+  color: #E2C384;
+  text-decoration-color: #C9A55C;
+}
+
+::selection {
+  background: rgba(201, 165, 92, 0.26);
+}
+
+*:focus-visible {
+  outline: 1px solid #C9A55C;
+  outline-offset: 3px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  background: #302A21;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 13px;
+  width: 13px;
+  border-radius: 999px;
+  background: #C9A55C;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 5px rgba(201, 165, 92, 0.16);
+}
+input[type="range"]::-moz-range-thumb {
+  height: 13px;
+  width: 13px;
+  border: none;
+  border-radius: 999px;
+  background: #C9A55C;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Horizontal ledger band between sections. The track holds two identical
+   copies of the list, so translating it by half its width loops seamlessly. */
+.marquee {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 10%,
+    #000 90%,
+    transparent
+  );
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: ledger-scroll 70s linear infinite;
+}
+
+.marquee-track[data-direction="reverse"] {
+  animation-direction: reverse;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes ledger-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
