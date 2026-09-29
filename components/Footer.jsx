@@ -2,12 +2,7 @@
 
 import { contact, identity } from "@/data/profile";
 import { Reveal, Rule } from "@/components/ui";
-
-const LINKS = [
-  { label: "LinkedIn", href: contact.linkedin, external: true },
-  { label: "GitHub", href: contact.github, external: true },
-  { label: "Resume", href: identity.resume, external: false },
-];
+import { openResumePicker } from "@/components/ResumePicker";
 
 export default function Footer() {
   return (
@@ -39,18 +34,35 @@ export default function Footer() {
               <div>
                 <p className="label">Elsewhere</p>
                 <ul className="mt-3 space-y-1.5">
-                  {LINKS.map((l) => (
-                    <li key={l.label}>
-                      <a
-                        href={l.href}
-                        target={l.external ? "_blank" : undefined}
-                        rel={l.external ? "noreferrer" : undefined}
-                        className="link-underline text-[14px] text-muted"
-                      >
-                        {l.label}
-                      </a>
-                    </li>
-                  ))}
+                  <li>
+                    <a
+                      href={contact.linkedin}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="link-underline text-[14px] text-muted"
+                    >
+                      LinkedIn
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={contact.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="link-underline text-[14px] text-muted"
+                    >
+                      GitHub
+                    </a>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      onClick={openResumePicker}
+                      className="link-underline text-[14px] text-muted"
+                    >
+                      Resume
+                    </button>
+                  </li>
                 </ul>
               </div>
             </div>

@@ -9,7 +9,7 @@ export default function Leadership() {
       id="leadership"
       index="06"
       title="Leadership"
-      lede="Committees, editorial work and festivals. The common thread is being responsible for what goes out under someone else's name."
+      lede="Committees, outreach and festivals. The common thread is being responsible for what goes out under someone else's name."
     >
       <ul className="divide-y divide-line border-y border-line">
         {leadership.map((l, i) => (

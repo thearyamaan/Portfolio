@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { identity, metrics, education, contact } from "@/data/profile";
 import { CountUp } from "@/components/ui";
+import { openResumePicker } from "@/components/ResumePicker";
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -68,9 +69,9 @@ export default function Hero() {
           <a href="#finance" className="link-underline text-brass">
             Try the calculator
           </a>
-          <a href={identity.resume} className="link-underline text-brass">
+          <button type="button" onClick={openResumePicker} className="link-underline text-brass">
             Resume
-          </a>
+          </button>
           <a href={`mailto:${contact.email}`} className="link-underline text-brass">
             Email
           </a>

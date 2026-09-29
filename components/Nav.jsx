@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { sections, identity } from "@/data/profile";
+import { sections } from "@/data/profile";
+import { openResumePicker } from "@/components/ResumePicker";
 
 export default function Nav() {
   const [active, setActive] = useState("");
@@ -47,7 +48,7 @@ export default function Nav() {
           <span className="font-serif text-[18px] italic text-brass">Upadhyay</span>
         </a>
 
-        <ul className="hidden items-center gap-1 md:flex">
+        <ul className="hidden items-center gap-1 lg:flex">
           {sections.map((s) => (
             <li key={s.id} className="relative">
               <a
@@ -68,12 +69,13 @@ export default function Nav() {
             </li>
           ))}
           <li>
-            <a
-              href={identity.resume}
+            <button
+              type="button"
+              onClick={openResumePicker}
               className="ml-3 rounded-full border border-brass/40 px-3.5 py-1.5 text-[13px] text-brass transition-colors hover:bg-brass/10"
             >
               Resume
-            </a>
+            </button>
           </li>
         </ul>
 
@@ -82,15 +84,15 @@ export default function Nav() {
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
-          className="text-[13px] text-muted md:hidden"
+          className="text-[13px] text-muted lg:hidden"
         >
           {open ? "Close" : "Menu"}
         </button>
       </nav>
 
       {open && (
-        <div className="border-t border-line bg-base px-6 pb-5 pt-3 md:hidden">
-          <ul className="space-y-1">
+        <div className="border-t border-line bg-base px-6 pb-5 pt-3 lg:hidden">
+          <ul className="grid grid-cols-2 gap-x-6">
             {sections.map((s) => (
               <li key={s.id}>
                 <a
@@ -104,12 +106,17 @@ export default function Nav() {
                 </a>
               </li>
             ))}
-            <li>
-              <a href={identity.resume} className="block py-2 text-[15px] text-brass">
-                Resume
-              </a>
-            </li>
           </ul>
+          <button
+            type="button"
+            onClick={() => {
+              setOpen(false);
+              openResumePicker();
+            }}
+            className="mt-3 w-full rounded-full border border-brass/40 px-4 py-2 text-[14px] text-brass"
+          >
+            Resume
+          </button>
         </div>
       )}
     </header>

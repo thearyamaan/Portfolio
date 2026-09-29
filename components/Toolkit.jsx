@@ -23,13 +23,10 @@ export default function Toolkit() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <p className="label">Credentials</p>
+          <p className="label">Credentials and programmes</p>
           <ul className="mt-4 divide-y divide-line border-y border-line">
             {credentials.map((c) => (
-              <li
-                key={c.name}
-                className="group flex items-baseline justify-between gap-6 py-3.5"
-              >
+              <li key={c.name} className="group flex items-baseline justify-between gap-6 py-3.5">
                 <span className="text-[14.5px] text-ivory transition-colors group-hover:text-brass">
                   {c.name}
                 </span>

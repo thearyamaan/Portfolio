@@ -12,7 +12,11 @@ export default function Experience() {
   return (
     <Section id="experience" index="02" title="Experience">
       <div className="grid gap-8 md:grid-cols-[230px_1fr] md:gap-14">
-        <div role="tablist" aria-label="Roles" className="flex gap-2 md:flex-col">
+        <div
+          role="tablist"
+          aria-label="Roles"
+          className="flex gap-2 overflow-x-auto pb-2 md:flex-col md:overflow-visible md:pb-0"
+        >
           {experience.map((e) => {
             const on = e.id === active;
             return (
@@ -21,7 +25,7 @@ export default function Experience() {
                 role="tab"
                 aria-selected={on}
                 onClick={() => setActive(e.id)}
-                className="relative w-full px-4 py-3 text-left transition-colors"
+                className="relative shrink-0 px-4 py-3 text-left transition-colors md:w-full"
               >
                 {on && (
                   <motion.span
@@ -31,7 +35,7 @@ export default function Experience() {
                   />
                 )}
                 <span
-                  className={`block font-serif text-[17px] transition-colors ${
+                  className={`block whitespace-nowrap font-serif text-[17px] transition-colors md:whitespace-normal ${
                     on ? "text-brass" : "text-muted"
                   }`}
                 >
